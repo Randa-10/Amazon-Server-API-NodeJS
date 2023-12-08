@@ -5,13 +5,13 @@ const { auth } = require("../middlewares/userAuth");
 const {
     addNewCart,
     getCart,
-    updateCart,
     deleteProductFromCart,
+    updateCartItemQuantity,
 } = require("../controllers/cart");
 
 router.post("/", auth, addNewCart);
 router.get("/", auth, getCart);
-router.patch("/", auth, updateCart);
-router.delete("/", auth, deleteProductFromCart);
+router.patch("/", auth, updateCartItemQuantity);
+router.delete("/:productId", auth, deleteProductFromCart);
 
 module.exports = router;

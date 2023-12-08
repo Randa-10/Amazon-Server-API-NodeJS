@@ -1,62 +1,91 @@
 const mongoose = require("mongoose");
 
 const productSchema = mongoose.Schema(
-    {
-        title: {
-            type: String,
-            required: true,
-        },
-        descreption: {
-            type: String,
-            required: true,
-        },
-        imageUrl: {
-            type: String,
-            required: true,
-        },
-        category: {
-            type: mongoose.SchemaTypes.ObjectId,
-            ref: "SubCategory",
-        },
-        sku: {
-            type: String,
-            required: true,
-        },
-        quantity: {
-            type: Number,
-            required: true,
-        },
-        price: {
-            type: Number,
-            required: true,
-        },
-        rating: {
-            type: Number,
-            required: true,
-        },
-    },
-    // skus: {
-    //     type: Array,
-    //     required: true,
-    //     sku: {
-    //         type: Number,
-    //         required: true,
-    //     },
-    //     quantity: {
-    //         type: Number,
-    //         required: true,
-    //     },
-    //     price: {
-    //         type: Number,
-    //         required: true,
-    //     },
-    //     option: {
-    //         type: Array,
-    //         required: false,
-    //     },
-    // },
+	{
+		en: {
+			title: {
+				type: String,
+				required: true,
+			},
+			description: {
+				type: String,
+				required: true,
+			},
+			brand: {
+				type: String,
+				required: true,
+			},
+		},
+		ar: {
+			title: {
+				type: String,
+				required: true,
+			},
+			description: {
+				type: String,
+				required: true,
+			},
+			brand: {
+				type: String,
+				required: true,
+			},
+		},
+		thumbnail: {
+			type: String,
+			required: true,
+		},
+		images: {type: Array},
+		category: {
+			type: mongoose.SchemaTypes.ObjectId,
+			ref: "Category",
+		},
+		subCategory: {
+			type: mongoose.SchemaTypes.ObjectId,
+			ref: "SubCategory",
+		},
+		subSubCategor: {
+			type: mongoose.SchemaTypes.ObjectId,
+			ref: "sub_subCategor",
+		},
+		sku: {
+			type: String,
+			required: true,
+			unique: true,
+		},
+		quantityInStock: {
+			type: Number,
+			required: true,
+		},
+		price: {
+			type: Number,
+			required: true,
+		},
+		discountPercentage: {
+			type: Number,
+			required: true,
+		},
+		rating: {
+			type: Number,
+			// required: true,
+			default: 0,
+		},
+		ratingQuantity: {type: Number, default: 0},
+		rating: {
+			type: Number,
+			default: 0,
+		},
+		sold: {
+			type: Number,
+			default: 0,
+		},
+		createdBy: {
+			type: mongoose.SchemaTypes.ObjectId,
+			ref: "User",
+			required: true,
+		},
+	},
 
-    { timestamps: true }
+	{timestamps: true}
 );
 
 const productModel = mongoose.model("Product", productSchema);

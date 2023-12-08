@@ -2,13 +2,7 @@ const mongoose = require("mongoose");
 const bcrypt=require('bcryptjs')
 
 var userSchema = new mongoose.Schema({
-  firstName: {
-    type: String,
-    minlength: 4,
-    maxlength: 10,
-    required: true,
-  },
-  lastName: {
+  name: {
     type: String,
     minlength: 4,
     maxlength: 10,
@@ -23,7 +17,12 @@ var userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    minlength: 6,
+    minlength: 8,
+    required: true,
+  },
+  ConfirmPassword:{
+    type: String,
+    minlength: 8,
     required: true,
   },
   userType:{
@@ -32,19 +31,19 @@ var userSchema = new mongoose.Schema({
     enum:["user","admin"]
   },
   address: {
-    country: { type: String, minlength: 4, default: "Egypt" },
+    country: { type: String, minlength: 4},
     street1: {
       type: String,
       minlength: 4,
-      default: "el moez street",
+     
     },
     city: {
       type: String,
       minlength: 4,
-      default: "el moez street",
+     
     },
-    province: { type: String, minlength: 4, default: "cairo" },
-    zip: { type: Number, minlength: 5, default: "11111" },
+    province: { type: String, minlength: 4 },
+    zip: { type: Number, minlength: 5},
   },
 });
 // hashing password

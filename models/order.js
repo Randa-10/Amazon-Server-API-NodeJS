@@ -5,11 +5,15 @@ const orderSchema = mongoose.Schema({
         ref:'User',
         required:true
     },
+    name:{
+        type:String,
+        minlength: 4,
+    },
     cartItems:[
         {
             productId: {
                 type: mongoose.SchemaTypes.ObjectId,
-                ref: "products",
+                ref: "Product",
             },
             quantity: {
                 type: Number,

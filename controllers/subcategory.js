@@ -11,9 +11,6 @@ const getallSubcategory = async (req, res) => {
         })
 
     } 
-
-    console.log(subCategory)
-    res.json(subCategory)
 }
  //getsubCategoryByid
 const getSubcategoryByid = async (req, res) => {
@@ -36,6 +33,22 @@ const getSubcategoryByid = async (req, res) => {
 
     }
 }
+
+
+// //get subcategories of specific category:
+
+const subOfCategory = async (req,res)=>{
+    const parentCategory = req.params.categoryId
+    console.log(parentCategory,"kkkk");
+    try{
+        const subCtegories = await subCategorymodel.find( {categoryid : parentCategory}).populate("categoryid")
+        res.status(201).json({data:subCtegories})
+    }catch{
+        res.status(500).json({ message: error.message });
+    }
+}
+
+
 //post
 const saveSubcategory = async (req, res) => {
     var subCategory = req.body 
@@ -58,7 +71,7 @@ const patchSubcategory = async (req, res) => {
     var {id} = req.params;
     try {
         const queryRes2 = await subCategorymodel.updateOne({ _id: id }, { name: name })
-        console.log(queryRes2)
+        console.log(queryRes2,"uj")
         res.json({
             message: "updated"
         })
@@ -75,7 +88,6 @@ const deletSubcategory=async(req,res)=>{
   try{
     var subCategory= await subCategorymodel.deleteOne({ _id: id})
 
-console.log(subCategory)
 res.json({message:"delet run"})
 
 }
@@ -85,4 +97,4 @@ catch(err){
     })
 }
 }
-module.exports = { getallSubcategory, saveSubcategory, getSubcategoryByid, patchSubcategory, deletSubcategory}
+module.exports = { getallSubcategory, saveSubcategory, getSubcategoryByid, patchSubcategory, deletSubcategory,subOfCategory}
